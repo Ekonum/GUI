@@ -1,3 +1,4 @@
+console.log('Script update_flutter_version.js is running...');
 const fs = require('fs');
 const yaml = require('js-yaml');
 const path = require('path');
