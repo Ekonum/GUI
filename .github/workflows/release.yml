@@ -1,0 +1,47 @@
+name: Semantic Release CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: write # Allow tagging, releases, pushing version updates
+  issues: write   # Allow linking issues in release notes
+  pull-requests: write # Allow linking PRs in release notes
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          # Need full history for semantic-release to analyze commits
+          fetch-depth: 0
+          # Required for @semantic-release/git to push changes
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install Node dependencies (semantic-release)
+        run: npm ci
+
+      - name: Build Flutter APK
+        run: flutter build apk --release
+
+      - name: Run Semantic Release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,38 @@
+{
+  "branches": [
+    "master",
+    "main"
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "node ./scripts/update_flutter_version.js ${nextRelease.version}"
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "pubspec.yaml",
+          "CHANGELOG.md"
+        ],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "build/app/outputs/flutter-apk/app-release.apk",
+            "label": "Ekonum Android APK (${nextRelease.version})"
+          }
+        ]
+      }
+    ]
+  ]
+}
