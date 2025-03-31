@@ -37,9 +37,6 @@ concepts.
 
 ## Screenshots
 
-<!-- Add screenshots of the running application here -->
-<!-- Example: -->
-<!--
 **Dashboard**
 ![Dashboard Screenshot](docs/screenshots/dashboard.png)
 
@@ -57,8 +54,6 @@ concepts.
 
 **Node/Device Details**
 ![Node Details Screenshot](docs/screenshots/node_details.png)
--->
-*(Add screenshots of the actual app once available)*
 
 ## Tech Stack
 
@@ -82,7 +77,7 @@ concepts.
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Ekonum/GUI.git
    cd ekonum_app
    ```
 2. **Ensure Assets:** Make sure the Ekonum logo exists at `assets/logos/ekonum_logo.svg` (or update
